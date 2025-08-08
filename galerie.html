@@ -1,0 +1,172 @@
+<!DOCTYPE html> 
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Galerie - Eben-Ezer</title>
+  <style>
+    body {
+      background: #f0fff0;
+      font-family: Tahoma, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #2e8b57;
+    }
+    img {
+      margin: 10px;
+      border: 3px solid #2e8b57;
+      border-radius: 10px;
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    a.button {
+      display: inline-block;
+      margin-top: 30px;
+      background: #2e8b57;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    a.button:hover {
+      background: #1c5c3b;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border: none;
+      border-radius: 0;
+    }
+    .controls {
+      margin-top: 15px;
+    }
+    .controls button {
+      background: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 0 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .controls button:hover {
+      background: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Galerie de Eben-Ezer</h1>
+
+  <!-- Images -->
+  <img src="F1.jpg" alt="Création couture" />
+  <img src="F2.jpg" alt="Création couture" />
+  <img src="F3.jpg" alt="Création couture" />
+  <img src="F4.jpg" alt="Création couture" />
+  <img src="F5.jpg" alt="Création couture" />
+  <img src="F6.jpg" alt="Création couture" />
+  <img src="F7.jpg" alt="Création couture" />
+  <img src="F8.jpg" alt="Création couture" />
+
+  <video width="640" height="360" controls>
+    <source src="F9.mp4" type="video/mp4">
+    Votre navigateur ne supporte pas la balise vidéo.
+  </video>
+
+  <img src="F10.jpg" alt="Création couture" />
+  <img src="F11.jpg" alt="Création couture" />
+  <img src="F12.jpg" alt="Création couture" />
+  <img src="F13.jpg" alt="Création couture" />
+  <img src="F14.jpg" alt="Création couture" />
+  <img src="F15.jpg" alt="Création couture" />
+  <img src="F16.jpg" alt="Création couture" />
+  <img src="F17.jpg" alt="Création couture" />
+  <img src="F18.jpg" alt="Création couture" />
+  <img src="F19.jpg" alt="Création couture" />
+  <img src="F20.jpg" alt="Création couture" />
+  <img src="F21.jpg" alt="Création couture" />
+  <img src="F22.jpg" alt="Création couture" />
+  <img src="F23.jpg" alt="Création couture" />
+  <img src="F24.jpg" alt="Création couture" />
+  <img src="F25.jpg" alt="Création couture" />
+  <img src="F27.jpg" alt="Création couture" />
+  <img src="F28.jpg" alt="Création couture" />
+  <img src="F30.jpg" alt="Création couture" />
+  <img src="F31.jpg" alt="Création couture" />
+
+  <br>
+  <a href="index.html" class="button">Retour à l'accueil</a>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Agrandissement">
+    <div class="controls">
+      <button id="prev">← Précédente</button>
+      <button id="close">Retour à la galerie</button>
+      <button id="next">Suivante →</button>
+    </div>
+  </div>
+
+  <script>
+    const images = document.querySelectorAll('body > img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const btnPrev = document.getElementById('prev');
+    const btnNext = document.getElementById('next');
+    const btnClose = document.getElementById('close');
+
+    let currentIndex = 0;
+
+    // Ouvrir image
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        currentIndex = index;
+        showImage();
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    function showImage() {
+      lightboxImg.src = images[currentIndex].src;
+    }
+
+    btnPrev.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage();
+    });
+
+    btnNext.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage();
+    });
+
+    btnClose.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+    });
+
+    // Fermer en cliquant hors de l'image
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
